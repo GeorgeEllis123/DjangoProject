@@ -2,15 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Profile(models.Model):
-    #first_name = models.CharField(max_length=30, null=True)
-    #last_name = models.CharField(max_length=30, null=True)
-    #password = models.CharField(max_length=30, null=True)
-    #email = models.CharField(max_length=100, null=True)
-    #date_created = models.DateTimeField(auto_now_add=True, null=True)
-    #all above info in user model
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True
+    )
 
-    username = models.CharField(max_length=30, null=True)
-    bio = models.CharField(max_length=500, null=True)
+    bio = models.TextField(default="", blank=True)
     #profile_pic = asdf
 
     def __str__(self):
@@ -19,12 +17,14 @@ class Profile(models.Model):
     # one-to-one relationship w/ User
 
 class Post(models.Model):
-    title = models.CharField(max_length=30, null=True)
+    title = models.CharField(max_length=50, null=True)
     caption = models.CharField(max_length=200, null=True)
     #image = asdf
-    post_date = models.DateTimeField(auto_now_add=True, null=True)
-    userPosted = models.ForeignKey(User, on_delete=models.CASCADE)
+    post_date = models.DateTimeField('date published')
+    #userPosted = models.ForeignKey(User, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    #comments = models.ForeignKey(Comment, on_delete=models.SET_NULL)
+    likes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title

@@ -17,3 +17,6 @@ def settings(request):
 
 def feed(request):
     return render(request, 'accounts/feed.html')
+
+def login(request):
+    return render(request, 'accounts/login.html')

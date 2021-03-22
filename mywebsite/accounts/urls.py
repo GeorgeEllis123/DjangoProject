@@ -6,5 +6,6 @@ urlpatterns = [
     path('profile/', views.profile),
     path('settings/', views.settings),
     path('feed/', views.feed),
+    path('login/', views.login),
 
 ]
