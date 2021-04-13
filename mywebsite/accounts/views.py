@@ -5,8 +5,6 @@ from .models import *
 # Create your views here.
 
 def home(request):
-    #posts = Post.object.all()
-
     return render(request, 'accounts/home.html')
 
 def profile(request):
@@ -16,7 +14,8 @@ def settings(request):
     return render(request, 'accounts/settings.html')
 
 def feed(request):
-    return render(request, 'accounts/feed.html')
+    posts = Post.objects.all()
+    return render(request, 'accounts/feed.html', {'posts': posts})
 
 def login(request):
     return render(request, 'accounts/login.html')

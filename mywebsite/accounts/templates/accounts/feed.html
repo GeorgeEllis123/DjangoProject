@@ -5,6 +5,13 @@
     <title></title>
   </head>
   <body>
-    <h1>feed</h1>
+    <h1>Feed</h1>
+
+    {% for i in posts %}
+      <h3>{{i.title}}</h3>
+      <p>{{i.caption}}</p>
+      </br>
+    {% endfor %}
+
   </body>
 </html>
