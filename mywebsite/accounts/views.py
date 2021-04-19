@@ -7,8 +7,12 @@ from .models import *
 def home(request):
     return render(request, 'accounts/home.html')
 
-def profile(request):
-    return render(request, 'accounts/profile.html')
+def profile(request, pk):
+    profile = Profile.objects.get(user_id=pk)
+
+    posts = profile.post_set.all()
+    context = {'profile': profile, 'posts':posts}
+    return render(request, 'accounts/profile.html', context)
 
 def settings(request):
     return render(request, 'accounts/settings.html')
