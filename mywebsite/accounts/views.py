@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import *
 from .forms import PostForm
@@ -14,6 +14,12 @@ def profile(request, pk):
     posts = profile.post_set.all()
 
     form = PostForm()
+    if request.method == "POST":
+        print('Printing POST:', request.POST)
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
 
     context = {'profile': profile, 'posts':posts, 'form': form}
     return render(request, 'accounts/profile.html', context)
