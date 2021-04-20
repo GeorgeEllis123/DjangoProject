@@ -6,10 +6,18 @@
   </head>
   <body>
     <h1>Profile Page</h1>
+
+    <h2>Your Posts</h2>
     {% for post in posts %}
 
-    <h4>{{post.title}}</p>
+    <h3>{{post.title}}</p>
     <p>{{post.likes}}</p>
+
+    <h2>Add Post<h2>
+    <form action="" method="post">
+      
+      <input type="submit" value="Post">
+    </form>
 
 		{% endfor %}
   </body>

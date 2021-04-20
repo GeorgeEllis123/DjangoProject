@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from .models import *
+from .forms import PostForm
 
 # Create your views here.
 
