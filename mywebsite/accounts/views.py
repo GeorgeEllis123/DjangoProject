@@ -12,7 +12,10 @@ def profile(request, pk):
     profile = Profile.objects.get(user_id=pk)
 
     posts = profile.post_set.all()
-    context = {'profile': profile, 'posts':posts}
+
+    form = PostForm()
+
+    context = {'profile': profile, 'posts':posts, 'form': form}
     return render(request, 'accounts/profile.html', context)
 
 def settings(request):

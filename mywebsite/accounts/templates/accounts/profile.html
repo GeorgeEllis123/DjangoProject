@@ -14,11 +14,15 @@
     <p>{{post.likes}}</p>
 
     <h2>Add Post<h2>
+
+		{% endfor %}
+
     <form action="" method="post">
-      
+      {% csrf_token %}
+      {{ form }}
+
       <input type="submit" value="Post">
     </form>
 
-		{% endfor %}
   </body>
 </html>
