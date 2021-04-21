@@ -15,11 +15,10 @@ def profile(request, pk):
 
     form = PostForm()
     if request.method == "POST":
-        print('Printing POST:', request.POST)
         form = PostForm(request.POST)
         if form.is_valid():
             form.save()
-            
+
 
     context = {'profile': profile, 'posts':posts, 'form': form}
     return render(request, 'accounts/profile.html', context)
