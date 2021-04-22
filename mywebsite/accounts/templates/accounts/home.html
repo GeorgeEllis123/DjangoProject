@@ -13,6 +13,27 @@
     <title>Home Page</title>
   </head>
   <body>
-    <h1>home</h1>
+    <!-- Sidenav -->
+    <div id="mySidenav" class="sidenav" style="z-index:9999">
+      <br />
+      <a>Home</a>
+      <a href="feed.html" target="_self">Feed</a>
+      <a href="profile.html" target="_self">Profile</a>
+      <a href="settings.html" target="_self">Settings</a>
+      <a href="other-pages/info.html" target="_self">About</a>
+    </div>
+
+    <!-- Navbar -->
+    <div class="container-fluid sticky" id="customNav">
+      <div class="btn" onclick="menuAnimation(this); changeNav()" role="button">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      <h2 class="centeredNavInfo">Website Name</h2>
+      <a href="" class="rightNavInfo">
+         <button class="btn light" style="font-size:1.5vw">Log Out</button>
+      </a>
+    </div>
   </body>
 </html>
