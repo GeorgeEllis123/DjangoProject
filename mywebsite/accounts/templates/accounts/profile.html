@@ -1,35 +1,23 @@
-{% load static %}
+{% extends 'accounts/main.html' %}
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href={% static '/css/mystylesheet.css' %}>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link src={% static 'js/scripts.js' %}>
-    <title></title>
-  </head>
-  <body>
-    <h1>Profile Page</h1>
+{% block content %}
 
-    <h2>Your Posts</h2>
-    {% for post in posts %}
+<h2>Profile Page</h2>
+<h3>Your Posts</h2>
 
-    <h3>{{post.title}}</p>
-    <p>{{post.likes}}</p>
+{% for post in posts %}
 
-		{% endfor %}
+<h4>{{post.title}}</p>
+<p>{{post.likes}}</p>
 
-    <h2>Add Post<h2>
-    <form method="post">
-      {% csrf_token %}
-      {{ form }}
+{% endfor %}
 
-      <input type="submit" value="Post">
-    </form>
+<h3>Add Post<h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
 
-  </body>
-</html>
+  <input type="submit" value="Post">
+</form>
+
+{% endblock %}
