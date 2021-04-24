@@ -2,16 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Profile(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        primary_key=True
-
-    )
-
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    profile_pic = models.ImageField(null=True, blank=True)
     bio = models.TextField(default="", blank=True)
-
-    #profile_pic = asdf
     #def __str__(self):
     #    return self.username
 
