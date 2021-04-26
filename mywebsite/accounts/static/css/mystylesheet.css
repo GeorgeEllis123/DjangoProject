@@ -1,5 +1,5 @@
 body {
-  background-color: #eeeeee;
+  background-color: white;
 }
 
 h1 {
@@ -19,7 +19,7 @@ h1 {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #d3d3d3;
+  background-color: white;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -35,7 +35,8 @@ h1 {
 }
 
 .sidenav a:hover {
-  background-color: #eeeeee;
+  background-color: #333;
+  color: white;
 }
 
 .sidenav .closebtn {
@@ -83,7 +84,7 @@ div.sticky {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  background-color: #d3d3d3;
+  background-color: white;
   padding: 20px;
   z-index: 9999;
 }
