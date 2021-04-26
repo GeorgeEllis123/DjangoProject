@@ -3,16 +3,16 @@
 {% block content %}
 
 <h2>Profile Page</h2>
-<h3>Your Posts</h2>
+<h3>Your Posts</h3>
 
 {% for post in posts %}
 
-<h4>{{post.title}}</p>
+<h4>{{post.title}}</h4>
 <p>{{post.likes}}</p>
 
 {% endfor %}
 
-<h3>Add Post<h2>
+<h3>Add Post<h3>
 <form method="post">
   {% csrf_token %}
   {{ form }}
