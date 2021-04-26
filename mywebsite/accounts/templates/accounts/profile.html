@@ -2,22 +2,37 @@
 
 {% block content %}
 
-<h2>Profile Page</h2>
-<h3>Your Posts</h3>
+<div class="container-sm">
+  <h2>Edit Profile</h2>
+</div>
 
-{% for post in posts %}
+<br />
+<hr class="rounded">
+<br />
 
-<h4>{{post.title}}</h4>
-<p>{{post.likes}}</p>
+<div class="container-sm">
+  <h2>My Posts</h2>
 
-{% endfor %}
+  {% for post in posts %}
 
-<h3>Add Post<h3>
-<form method="post">
-  {% csrf_token %}
-  {{ form }}
+  <h4>{{post.title}}</h4>
+  <p>{{post.likes}}</p>
 
-  <input type="submit" value="Post">
-</form>
+  {% endfor %}
+</div>
+
+<br />
+<hr class="rounded">
+<br />
+
+<div class="container-sm">
+  <h2>Add Post<h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+
+    <input type="submit" value="Post">
+  </form>
+</div>
 
 {% endblock %}
