@@ -4,8 +4,9 @@
 <h2>Feed</h2>
 </br>
 {% for i in posts %}
-  <h3>{{i.title}}</h3>
+  <img src="{{i.image.url }}" alt="post image">
+  <h4>{{i.title}}</h4>
   <p>{{i.caption}}</p>
-  </br>
+  </ br>
 {% endfor %}
 {% endblock %}
