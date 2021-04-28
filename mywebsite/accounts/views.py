@@ -32,3 +32,9 @@ def feed(request):
 
 def login(request):
     return render(request, 'accounts/login.html')
+
+def post(request, pk):
+    post = Post.objects.get(id=pk)
+
+    context = {'post': post}
+    return render(request, 'accounts/post.html', context)

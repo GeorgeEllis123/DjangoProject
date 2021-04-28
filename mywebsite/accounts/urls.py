@@ -7,5 +7,6 @@ urlpatterns = [
     path('settings/', views.settings, name="settings_page"),
     path('feed/', views.feed, name="feed_page"),
     path('login/', views.login, name="login_page"),
+    path('post/<str:pk>/', views.post, name="post_page"),
 
 ]
