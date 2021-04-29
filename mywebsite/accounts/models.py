@@ -12,7 +12,7 @@ class Profile(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=50, null=True)
     caption = models.CharField(max_length=200, null=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True)
     post_date = models.DateTimeField('date published')
     userPosted = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
