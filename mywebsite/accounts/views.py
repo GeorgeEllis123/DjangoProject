@@ -44,5 +44,5 @@ def post(request, pk):
         if form.is_valid():
             form.save()
 
-    context = {'post': post, 'comments': comments}
+    context = {'post': post, 'comments': comments, 'form': form}
     return render(request, 'accounts/post.html', context)
