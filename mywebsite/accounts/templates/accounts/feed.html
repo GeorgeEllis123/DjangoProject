@@ -4,7 +4,9 @@
 <h2>Feed</h2>
 </br>
 {% for i in posts %}
-  <img src="{{i.image.url }}" alt="post image">
+  <a href="{% url 'post_page' i.id %}">
+    <img src="{{i.image.url }}" alt="post image">
+  </a>
   <h4>{{i.title}}</h4>
   <p>{{i.caption}}</p>
   </ br>
