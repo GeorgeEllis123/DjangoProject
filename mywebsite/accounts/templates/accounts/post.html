@@ -9,5 +9,16 @@
 <p>Post Date: {{post.post_date}}</p>
 <p>Likes: {{post.likes}}</p>
 
+<h3>Comments</h3>
+
+{% for comment in comments %}
+
+<h6>{{comment.title}}</h6>
+<p>{{comment.text}}</p>
+<p>User: {{comment.userPosted}}</p>
+<p>Post Date: {{comment.post_date}}</p>
+<br />
+
+{% endfor %}
 
 {% endblock %}

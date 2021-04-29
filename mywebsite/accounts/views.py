@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import *
-from .forms import PostForm
+from .forms import *
 
 # Create your views here.
 
@@ -20,7 +20,7 @@ def profile(request, pk):
             form.save()
 
 
-    context = {'profile': profile, 'posts':posts, 'form': form}
+    context = {'profile': profile, 'posts': posts, 'form': form}
     return render(request, 'accounts/profile.html', context)
 
 def settings(request):
@@ -36,5 +36,7 @@ def login(request):
 def post(request, pk):
     post = Post.objects.get(id=pk)
 
-    context = {'post': post}
+    comments = post.comment_set.all()
+
+    context = {'post': post, 'comments': comments}
     return render(request, 'accounts/post.html', context)
