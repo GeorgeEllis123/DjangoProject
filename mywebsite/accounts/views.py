@@ -38,5 +38,11 @@ def post(request, pk):
 
     comments = post.comment_set.all()
 
+    form = CommentForm()
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+
     context = {'post': post, 'comments': comments}
     return render(request, 'accounts/post.html', context)

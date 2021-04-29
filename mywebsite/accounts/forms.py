@@ -5,3 +5,8 @@ class PostForm(ModelForm):
     class Meta:
         model = Post
         fields = '__all__'
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = '__all__'
