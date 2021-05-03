@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import *
 from .forms import *
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
@@ -34,7 +35,15 @@ def login(request):
     return render(request, 'accounts/login.html')
 
 def register(request):
-    return render(request, 'accounts/register.html')
+    form = UserCreationForm()
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    context = {"form": form}
+    return render(request, 'accounts/register.html', context)
 
 def post(request, pk):
     post = Post.objects.get(id=pk)
