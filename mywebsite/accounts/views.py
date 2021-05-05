@@ -46,6 +46,10 @@ def loginPage(request):
 
     return render(request, 'accounts/login.html')
 
+def logoutUser(request):
+    logout(request)
+    return redirect('login_page')
+
 def register(request):
     form = CreateUserForm()
 
