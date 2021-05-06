@@ -98,7 +98,6 @@ div.sticky {
 
 #customNav {
   transition: .5s;
-  /* border-bottom: 1px solid white; */
 }
 
 .centeredNavInfo {
@@ -126,7 +125,20 @@ div.sticky {
   color: #ff6961;
 }
 
+
 .logout:hover {
   background-color: #ff6961;
+  color: white;
+}
+
+.login {
+  border: 2px solid;
+  cursor: pointer;
+  border-color: #00e600;
+  color: #00e600;
+}
+
+.login:hover {
+  background-color: #00e600;
   color: white;
 }

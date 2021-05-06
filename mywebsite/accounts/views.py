@@ -8,7 +8,10 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def home(request):
-    return render(request, 'accounts/home.html')
+    currentUser = request.user
+    LOGGEDIN = currentUser.is_authenticated
+    context = {"LOGGEDIN": LOGGEDIN}
+    return render(request, 'accounts/home.html', context)
 
 def profile(request, pk):
     profile = Profile.objects.get(user_id=pk)
@@ -26,11 +29,13 @@ def profile(request, pk):
     return render(request, 'accounts/profile.html', context)
 
 def settings(request):
+    context = {}
     return render(request, 'accounts/settings.html')
 
 def feed(request):
     posts = Post.objects.all()
-    return render(request, 'accounts/feed.html', {'posts': posts})
+    context = {'posts': posts}
+    return render(request, 'accounts/feed.html', context)
 
 def loginPage(request):
     if request.method == "POST":
