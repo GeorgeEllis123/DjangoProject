@@ -9,8 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 
 def home(request):
     currentUser = request.user
-    LOGGEDIN = currentUser.is_authenticated
-    context = {"LOGGEDIN": LOGGEDIN}
+    context = {"user": currentUser}
     return render(request, 'accounts/home.html', context)
 
 def profile(request, pk):
