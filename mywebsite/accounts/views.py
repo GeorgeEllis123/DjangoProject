@@ -5,6 +5,7 @@ from .forms import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -12,6 +13,7 @@ def home(request):
     context = {"user": currentUser}
     return render(request, 'accounts/home.html', context)
 
+@login_required(login_url='login_page')
 def profile(request, pk):
     profile = Profile.objects.get(user_id=pk)
 
@@ -37,34 +39,40 @@ def feed(request):
     return render(request, 'accounts/feed.html', context)
 
 def loginPage(request):
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+    if request.user.is_authenticated:
+        return redirect('home_page')
+    else:
+        if request.method == "POST":
+            username = request.POST.get('username')
+            password = request.POST.get('password')
 
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home_page')
-        else:
-            messages.info(request, 'Username OR Password is incorrect')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home_page')
+            else:
+                messages.info(request, 'Username OR Password is incorrect')
 
-    return render(request, 'accounts/login.html')
+        return render(request, 'accounts/login.html')
 
 def logoutUser(request):
     logout(request)
     return redirect('login_page')
 
 def register(request):
-    form = CreateUserForm()
+    if request.user.is_authenticated:
+        return redirect('home_page')
+    else:
+        form = CreateUserForm()
 
-    if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for ' + user)
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request, 'Account was created for ' + user)
 
-            return redirect('login_page')
+                return redirect('login_page')
 
 
     context = {"form": form}
