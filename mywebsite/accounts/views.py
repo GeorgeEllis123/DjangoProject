@@ -1,11 +1,16 @@
+#Imports from django
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from .models import *
-from .forms import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+
+#Imports from my files
+from .models import *
+from .forms import *
+from .decorators import unauthenticated_user
 
 
 def home(request):
@@ -38,41 +43,36 @@ def feed(request):
     context = {'posts': posts}
     return render(request, 'accounts/feed.html', context)
 
+@unauthenticated_user
 def loginPage(request):
-    if request.user.is_authenticated:
-        return redirect('home_page')
-    else:
-        if request.method == "POST":
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('home_page')
-            else:
-                messages.info(request, 'Username OR Password is incorrect')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home_page')
+        else:
+            messages.info(request, 'Username OR Password is incorrect')
 
-        return render(request, 'accounts/login.html')
+    return render(request, 'accounts/login.html')
 
 def logoutUser(request):
     logout(request)
     return redirect('login_page')
 
+@unauthenticated_user
 def register(request):
-    if request.user.is_authenticated:
-        return redirect('home_page')
-    else:
-        form = CreateUserForm()
+    form = CreateUserForm()
 
-        if request.method == 'POST':
-            form = CreateUserForm(request.POST)
-            if form.is_valid():
-                form.save()
-                user = form.cleaned_data.get('username')
-                messages.success(request, 'Account was created for ' + user)
-
-                return redirect('login_page')
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for ' + user)
+            return redirect('login_page')
 
 
     context = {"form": form}
