@@ -37,3 +37,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.title
+
+class Like(models.Model):
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    liked_post = models.OneToOneField(Post, on_delete=models.CASCADE, primary_key=True)
