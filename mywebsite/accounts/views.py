@@ -24,7 +24,9 @@ def profile(request, pk):
         if request.method == "POST":
             form = PostForm(request.POST)
             if form.is_valid():
-                form.save()
+                stock = form.save(commit=False)
+                stock.userPosted = request.user.profile
+                stock.save()
     else:
         form = None
 

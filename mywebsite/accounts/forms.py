@@ -7,7 +7,7 @@ from .models import Post, Comment
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['title', 'caption'] # need to readd image field when image upload works
 
 class CommentForm(ModelForm):
     class Meta:
