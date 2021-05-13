@@ -25,14 +25,17 @@
 <hr class="rounded">
 <br />
 
-<div class="container-sm">
-  <h2>Add Post<h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form }}
+{% if form %}
+  <div class="container-sm">
+    <h2>Add Post<h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form }}
 
-    <input type="submit" value="Post">
-  </form>
-</div>
+      <input type="submit" value="Post">
+    </form>
+  </div>
+{% endif %}
+
 
 {% endblock %}

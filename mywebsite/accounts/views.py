@@ -18,17 +18,18 @@ def home(request):
     context = {"user": currentUser}
     return render(request, 'accounts/home.html', context)
 
-@login_required(login_url='login_page')
 def profile(request, pk):
+    if int(pk) == request.user.id:
+        form = PostForm()
+        if request.method == "POST":
+            form = PostForm(request.POST)
+            if form.is_valid():
+                form.save()
+    else:
+        form = None
+
     profile = Profile.objects.get(user_id=pk)
-
     posts = profile.post_set.all()
-
-    form = PostForm()
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            form.save()
 
 
     context = {'profile': profile, 'posts': posts, 'form': form}
