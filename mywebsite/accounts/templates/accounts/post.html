@@ -19,14 +19,14 @@
 <p>Post Date: {{comment.post_date}}</p>
 <br />
 
+{% endfor %}
+
 <h3>Add Comment<h3>
 <form method="post">
   {% csrf_token %}
   {{ form }}
 
-  <input type="submit" value="Post">
+  <input type="submit" value="Post" name="Comment">
 </form>
-
-{% endfor %}
 
 {% endblock %}
