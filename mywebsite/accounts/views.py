@@ -102,7 +102,9 @@ def post(request, pk):
                 stock = formData.save(commit=False)
                 stock.user = request.user.profile
                 stock.liked_post = post
+                post.likes += 1
                 stock.save()
+                post.save()
 
     context = {'post': post, 'comments': comments, 'form': form, 'form_like': form_like}
     return render(request, 'accounts/post.html', context)
