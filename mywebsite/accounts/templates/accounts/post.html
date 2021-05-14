@@ -8,6 +8,12 @@
 <p>User: {{post.userPosted}}</p>
 <p>Post Date: {{post.post_date}}</p>
 <p>Likes: {{post.likes}}</p>
+<form method="post">
+  {% csrf_token %}
+  {{ form_like }}
+
+  <input type="submit" value="Like Post" name="Like">
+</form>
 
 <h3>Comments</h3>
 

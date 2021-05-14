@@ -87,20 +87,22 @@ def post(request, pk):
     comments = post.comment_set.all()
 
     form = CommentForm()
-    #form_like = LikeForm()
+    form_like = LikeForm()
     if request.method == "POST":
-        form = PostForm(request.POST)
-        stock = form.save(commit=False)
+        formData = CommentForm(request.POST)
         if 'Comment' in request.POST.keys():
-            if form.is_valid():
+            if formData.is_valid():
+                stock = formData.save(commit=False)
                 stock.userPosted = request.user.profile
                 stock.post = post
                 stock.save()
-        elif 'Like' in request.POST.keys():
-            if form.is_valid():
+        formData = LikeForm(request.POST)
+        if 'Like' in request.POST.keys():
+            if formData.is_valid():
+                stock = formData.save(commit=False)
                 stock.user = request.user.profile
                 stock.liked_post = post
                 stock.save()
 
-    context = {'post': post, 'comments': comments, 'form': form}
+    context = {'post': post, 'comments': comments, 'form': form, 'form_like': form_like}
     return render(request, 'accounts/post.html', context)
