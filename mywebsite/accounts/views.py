@@ -108,3 +108,7 @@ def post(request, pk):
 
     context = {'post': post, 'comments': comments, 'form': form, 'form_like': form_like}
     return render(request, 'accounts/post.html', context)
+
+def likedposts(request):
+    context = {}
+    return render(request, 'accounts/liked.html', context)
