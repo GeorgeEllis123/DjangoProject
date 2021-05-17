@@ -109,6 +109,15 @@ def post(request, pk):
     context = {'post': post, 'comments': comments, 'form': form, 'form_like': form_like}
     return render(request, 'accounts/post.html', context)
 
-def likedposts(request):
-    context = {}
-    return render(request, 'accounts/liked.html', context)
+def likedposts(request, pk):
+    if int(pk) == request.user.id:
+        profile = Profile.objects.get(user_id=pk)
+        likes = profile.like_set.all()
+        posts = []
+        for i in likes:
+            posts.append(i.liked_post)
+            
+        context = {'profile': profile, 'posts': posts}
+        return render(request, 'accounts/liked.html', context)
+    else:
+        return redirect('home_page')

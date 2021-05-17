@@ -27,7 +27,11 @@
         <a>Profile</a>
       {% endif %}
       <a href = "{% url 'settings_page' %}">Settings</a>
-      <a>Liked</a>
+      {% if user.is_authenticated %}
+        <a href = "{% url 'likedposts_page' user.id %}">Liked</a>
+      {% else %}
+        <a>Liked</a>
+      {% endif %}
     </div>
 
     <!-- Navbar -->
