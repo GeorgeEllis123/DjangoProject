@@ -37,10 +37,6 @@ def profile(request, pk):
     context = {'profile': profile, 'posts': posts, 'form': form}
     return render(request, 'accounts/profile.html', context)
 
-def settings(request):
-    context = {}
-    return render(request, 'accounts/settings.html')
-
 def feed(request):
     posts = Post.objects.all()
     context = {'posts': posts}
@@ -116,7 +112,7 @@ def likedposts(request, pk):
         posts = []
         for i in likes:
             posts.append(i.liked_post)
-            
+
         context = {'profile': profile, 'posts': posts}
         return render(request, 'accounts/liked.html', context)
     else:
