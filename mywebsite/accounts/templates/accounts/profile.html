@@ -4,6 +4,12 @@
 
 <div class="container-sm">
   <h2>Edit Profile</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form_profile }}
+
+    <input type="submit" value="Update" name="Update">
+  </form>
 </div>
 
 <br />
@@ -30,9 +36,9 @@
     <h2>Add Post<h2>
     <form method="post">
       {% csrf_token %}
-      {{ form }}
+      {{ form_post }}
 
-      <input type="submit" value="Post">
+      <input type="submit" value="Post" name="NewPost">
     </form>
   </div>
 {% endif %}
