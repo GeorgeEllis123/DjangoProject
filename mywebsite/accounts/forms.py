@@ -9,10 +9,15 @@ class PostForm(ModelForm):
         model = Post
         fields = ['title', 'caption'] # need to readd image field when image upload works
 
-class UpdateForm(ModelForm):
+class UpdateUserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+class UpdateProfileForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio'] # need to add profile_pic when image upload works
+        fields = ['bio']  # need to add profile_pic when image upload works
 
 class CommentForm(ModelForm):
     class Meta:

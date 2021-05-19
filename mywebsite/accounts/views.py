@@ -22,8 +22,13 @@ def profile(request, pk):
     # Displays forms on profile page if the it is the logged in user's profile
     if int(pk) == request.user.id:
         form_post = PostForm()
+
+        updateUser = User.objects.get(id=pk)
+        form_user = UpdateUserForm(instance=updateUser)
+
         profile = Profile.objects.get(user_id=pk)
-        form_profile = UpdateForm(instance=profile)
+        form_profile = UpdateProfileForm(instance=profile)
+
         if request.method == "POST":
             formData = PostForm(request.POST)
             if 'NewPost' in request.POST.keys():
@@ -31,20 +36,24 @@ def profile(request, pk):
                     stock = form_post.save(commit=False)
                     stock.userPosted = request.user.profile
                     stock.save()
-            formData = UpdateForm(request.POST, instance=profile)
+            userData = UpdateUserForm(request.POST, instance=updateUser)
+            profileData = UpdateProfileForm(request.POST, instance=profile)
             if 'Update' in request.POST.keys():
-                if formData.is_valid():
-                    formData.save()
+                if userData.is_valid():
+                    userData.save()
+                if profileData.is_valid():
+                    profileData.save()
 
     else:
         form_post = None
+        form_user = None
         form_profile = None
 
     profile = Profile.objects.get(user_id=pk)
     posts = profile.post_set.all()
 
 
-    context = {'profile': profile, 'posts': posts, 'form_post': form_post, 'form_profile': form_profile}
+    context = {'profile': profile, 'posts': posts, 'form_post': form_post, 'form_user': form_user, 'form_profile': form_profile}
     return render(request, 'accounts/profile.html', context)
 
 def feed(request):
