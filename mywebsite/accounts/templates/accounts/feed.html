@@ -1,14 +1,13 @@
 {% extends 'accounts/main.html' %}
+{% load static %}
 
 {% block content %}
-<h2>Feed</h2>
-</br>
-{% for i in posts %}
-  <a href="{% url 'post_page' i.id %}">
-    <img src="{{i.image.url }}" alt="post image">
+
+<link rel="stylesheet" href={% static '/css/imagestylesheet.css' %}>
+
+{% for post in posts %}
+  <a href="{% url 'post_page' post.id %}">
+    <img class="rounded" src="{{post.image.url }}" alt="post image" style="max-width:25%">
   </a>
-  <h4>{{i.title}}</h4>
-  <p>{{i.caption}}</p>
-  </ br>
 {% endfor %}
 {% endblock %}

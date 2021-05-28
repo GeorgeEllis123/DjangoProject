@@ -2,43 +2,55 @@
 
 {% block content %}
 
+{% if form_post %}
+  <h2 style="text-align:center">Edit Profile</h2>
+  <br />
+  <div class="container-sm">
+    <form method="post" style="text-align:center">
+      {% csrf_token %}
+      {{ form_profile.as_p }}
+
+      {{ form_user.as_p }}
+
+      <input type="submit" value="Update" name="Update">
+    </form>
+  </div>
+
+  <br />
+  <hr class="rounded">
+  <br />
+
+{% endif %}
+
+
 <div class="container-sm">
-  <h2>Edit Profile</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form_profile }}
+  {% if form_post %}
+    <h2 style="text-align:center">My Posts</h2>
+  {% else %}
+    <h2 style="text-align:center">User's Posts</h2>
+  {% endif %}
 
-    {{ form_user }}
-
-    <input type="submit" value="Update" name="Update">
-  </form>
-</div>
-
-<br />
-<hr class="rounded">
-<br />
-
-<div class="container-sm">
-  <h2>My Posts</h2>
 
   {% for post in posts %}
 
-  <h4>{{post.title}}</h4>
-  <p>{{post.likes}}</p>
+    <a href="{% url 'post_page' post.id %}">
+      <img src="{{post.image.url }}" alt="post image">
+    </a>
 
   {% endfor %}
 </div>
 
-<br />
-<hr class="rounded">
-<br />
+{% if form_post %}
+  <br />
+  <hr class="rounded">
+  <br />
 
-{% if form %}
   <div class="container-sm">
-    <h2>Add Post<h2>
-    <form method="post">
+    <h2 style="text-align:center">Add Post</h2>
+    <br />
+    <form method="post" style="text-align:center">
       {% csrf_token %}
-      {{ form_post }}
+      {{ form_post.as_p }}
 
       <input type="submit" value="Post" name="NewPost">
     </form>

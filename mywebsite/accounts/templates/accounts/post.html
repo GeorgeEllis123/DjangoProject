@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<h2>{{post.title}}</h2>
-<img src="{{post.image.url }}" alt="post image">
+<img src="{{post.image.url }}" alt="post image" style="max-width:50%" class="center">
+<h3 style="text-align:center">{{post.title}}</h3>
 <h6>{{post.caption}}</h6>
 <p>User: {{post.userPosted}}</p>
 <p>Post Date: {{post.post_date}}</p>

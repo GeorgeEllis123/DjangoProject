@@ -1,20 +1,22 @@
 {% extends 'accounts/main.html' %}
 
 {% block content %}
-<div class="container-sm">
-  <h2>Liked Posts</h2>
+<style>
 
-  {% for post in posts %}
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
 
-  <h4>{{post.title}}</h4>
+</style>
+
+{% for post in posts %}
   <a href="{% url 'post_page' post.id %}">
-    <img src="{{post.image.url }}" alt="post image">
+    <img src="{{post.image.url }}" alt="post image" style="max-width:50%" class="center">
   </a>
+{% endfor %}
 
-  {% endfor %}
-</div>
 
-<br />
-<hr class="rounded">
-<br />
 {% endblock %}
