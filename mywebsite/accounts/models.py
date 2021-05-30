@@ -18,7 +18,7 @@ class Profile(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=50, null=True)
-    caption = models.CharField(max_length=200, null=True)
+    caption = models.TextField(default="", null=True)
     image = models.ImageField(null=True)
     post_date = models.DateTimeField(auto_now_add=True, null=True)
     userPosted = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
@@ -29,7 +29,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     title = models.CharField(max_length=30, null=True)
-    text = models.CharField(max_length=1000, null=True)
+    text = models.TextField(default="", null=True)
     post_date = models.DateTimeField(auto_now_add=True, null=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     userPosted = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)

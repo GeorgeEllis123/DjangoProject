@@ -149,3 +149,52 @@ div.sticky {
   margin-right: auto;
   width: 50%;
 }
+
+.submit_btn {
+  color: black;
+  border-color: black;
+  padding: 5px 10px;
+}
+
+.submit_btn:hover {
+  color: white;
+  border-color: white;
+  background: black;
+}
+
+.image {
+  opacity: 1
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.containerimage {
+  position: relative;
+  margin: auto;
+  text-align: center;
+}
+
+.containerimage:hover .image {
+  opacity: 0.3;
+}
+
+.containerimage:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  color: black;
+  font-size: 25px;
+}
