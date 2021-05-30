@@ -196,3 +196,15 @@ def likedposts(request, pk):
 
     else:
         return redirect('home_page') # Redirects the user to the home page
+
+def delete(request, pk):
+    user = request.user
+    if request.method == "POST":
+        logout(request)
+        user.delete()
+        return redirect('home_page')
+
+    if int(pk) == user.id:
+        return render(request, 'accounts/delete.html')
+    else:
+        return redirect('home_page')

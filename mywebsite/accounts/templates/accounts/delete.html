@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href={% static '/css/mystylesheet.css' %}>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Main Template</title>
+  </head>
+  <body>
+
+    <h3>Are you sure you want to delete your profile</h3>
+    <p><i>Note: This will delete all of your posts and comments</i></p>
+    <form action="{% url 'delete_page' user.id %}" method="POST">
+      {% csrf_token %}
+      <a href="{% url 'profile_page' user.id %}">No</a>
+
+      <input type="submit" value="Yes" name="Confirm">
+    </form>
+
+  </body>
+</html>
