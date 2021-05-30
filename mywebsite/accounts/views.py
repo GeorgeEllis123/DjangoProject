@@ -34,20 +34,18 @@ def profile(request, pk):
 
         # Checks if the view recieved post data from a form being submitted
         if request.method == "POST":
-            formData = PostForm(request.POST) # Saves the post data
-
             if 'NewPost' in request.POST.keys(): # Checks if the create post form was submitted
+                formData = PostForm(request.POST, request.FILES) # Saves the post data
                 if formData.is_valid(): # Checks if the form was completed
                     # Saves the data
                     stock = form_post.save(commit=False)
                     stock.userPosted = request.user.profile
                     stock.save()
 
-            # Saves the post data
-            userData = UpdateUserForm(request.POST, instance=updateUser)
-            profileData = UpdateProfileForm(request.POST, instance=profile)
-
             if 'Update' in request.POST.keys(): # Checks if the update user form was submitted
+                # Saves the post data
+                userData = UpdateUserForm(request.POST, request.FILES, instance=updateUser)
+                profileData = UpdateProfileForm(request.POST, request.FILES, instance=profile)
                 if userData.is_valid(): # Checks if the form was completed
                     userData.save() # Saves the data
 

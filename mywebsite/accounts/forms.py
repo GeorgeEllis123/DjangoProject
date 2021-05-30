@@ -7,7 +7,7 @@ from .models import Post, Comment, Like, Profile
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'caption'] # need to readd image field when image upload works
+        fields = ['title', 'caption', 'image']
 
 class UpdateUserForm(ModelForm):
     class Meta:
@@ -17,7 +17,7 @@ class UpdateUserForm(ModelForm):
 class UpdateProfileForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio']  # need to add profile_pic when image upload works
+        fields = ['bio', 'profile_pic']
 
 class CommentForm(ModelForm):
     class Meta:

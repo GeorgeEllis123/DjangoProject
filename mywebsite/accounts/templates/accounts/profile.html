@@ -9,7 +9,7 @@
   <h2 style="text-align:center">Edit Profile</h2>
   <br />
   <div class="container-sm">
-    <form method="post" style="text-align:center">
+    <form method="post" enctype="multipart/form-data" style="text-align:center">
       {% csrf_token %}
       {{ form_profile.as_p }}
 
@@ -37,7 +37,7 @@
 
 
   {% for post in posts %}
-    
+
     <a href="{% url 'post_page' post.id %}">
       <img src="{{post.image.url }}" alt="post image" style="max-width:25%">
     </a>
@@ -53,7 +53,7 @@
   <div class="container-sm">
     <h2 style="text-align:center">Add Post</h2>
     <br />
-    <form method="post" style="text-align:center">
+    <form method="post" enctype="multipart/form-data" style="text-align:center">
       {% csrf_token %}
       {{ form_post.as_p }}
 
