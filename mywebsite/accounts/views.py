@@ -132,12 +132,24 @@ def register(request):
 # Renders the post page (displays a single post and all its data)
 def post(request, pk):
     post = Post.objects.get(id=pk) # Gets the post for the specific page
-
     comments = post.comment_set.all() # Gets all of the comments for the post
+    likes = post.like_set.all() # Gets all of the likes for the post
+    user = request.user # Gets the user
 
-    # Gets the forms to add comments and likes
-    form = CommentForm()
-    form_like = LikeForm()
+    form = CommentForm() # Gets the form to add comments
+
+    # Checks if the user already liked the post
+    LIKED = False
+    for like in likes:
+        if like.user.user == user:
+            LIKED = True
+
+    # Gets the like form only if the post has not already been liked
+    if LIKED:
+        form_like = None
+    else:
+        form_like = LikeForm()
+
     # Checks if the view recieved post data from a form being submitted
     if request.method == "POST":
         formData = CommentForm(request.POST) # Saves the post data

@@ -15,15 +15,16 @@
   <br />
   <p><i>{{post.post_date}}</i></p>
   <p>Likes: {{post.likes}}</p>
-  <form method="post">
-    {% csrf_token %}
-    {{ form_like }}
+  {% if form_like %}
+    <form method="post">
+      {% csrf_token %}
+      {{ form_like }}
 
-    <input type="submit" class="btn submit_btn" value="Like" name="Like">
-  </form>
+      <input type="submit" class="btn submit_btn" value="Like" name="Like">
+    </form>
+  {% endif %}
 </div>
 
-<br />
 <br />
 <hr class="rounded">
 <br />
