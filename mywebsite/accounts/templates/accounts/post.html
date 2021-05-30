@@ -1,28 +1,25 @@
 {% extends 'accounts/main.html' %}
 
 {% block content %}
-<style>
-.container {
-  margin-left:25%;
-  margin-right:25%;
-}
 
-</style>
-
-
-<img src="{{post.image.url }}" alt="post image" style="max-width:50%" class="center">
+<div class="containercenter">
+  <a href="{% url 'profile_page' post.userPosted.user.id %}" class="profilelink">
+    <img src="{{ post.userPosted.profile_pic.url }}" alt="profile pic" id="postprofilepic" />
+    <p style="display:inline-block">{{post.userPosted}}</p>
+  </a>
+</div>
+<img src="{{ post.image.url }}" alt="post image" style="max-width:50%" class="center">
 <h3 style="text-align:center">{{post.title}}</h3>
-<div class="container">
+<div class="containercenter">
   <p><i>{{post.caption}}</i></p>
   <br />
-  <p>User: {{post.userPosted}}</p>
-  <p>Post Date: {{post.post_date}}</p>
+  <p><i>{{post.post_date}}</i></p>
   <p>Likes: {{post.likes}}</p>
   <form method="post">
     {% csrf_token %}
     {{ form_like }}
 
-    <input type="submit" value="Like Post" name="Like">
+    <input type="submit" class="btn submit_btn" value="Like" name="Like">
   </form>
 </div>
 
@@ -31,16 +28,21 @@
 <hr class="rounded">
 <br />
 
-<div class="container">
+<div class="containercenter">
   <h3>Comments</h3>
+  <br />
 
   {% for comment in comments %}
 
-  <p><strong>{{comment.title}}</strong></p>
-  <p>{{comment.text}}</p>
-  <p>User: {{comment.userPosted}}</p>
-  <p><i>{{comment.post_date}}</i></p>
-  <br />
+    <a href="{% url 'profile_page' comment.userPosted.user.id %}">
+      <img src="{{ comment.userPosted.profile_pic.url }}" alt="profile pic" id="commentprofilepic" />
+      <p style="display:inline-block">{{comment.userPosted}}</p>
+    </a>
+    <p><strong>{{comment.title}}</strong></p>
+    <p>{{comment.text}}</p>
+    <p><i>{{comment.post_date}}</i></p>
+    <br />
+    <br />
 
   {% endfor %}
 
