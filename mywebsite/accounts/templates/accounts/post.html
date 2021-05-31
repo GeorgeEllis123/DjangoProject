@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<!-- Displays all of the data for specific post -->
 <div class="containercenter">
   <a href="{% url 'profile_page' post.userPosted.user.id %}" class="profilelink">
     <img src="{{ post.userPosted.profile_pic.url }}" alt="profile pic" id="postprofilepic" />
@@ -15,6 +16,8 @@
   <br />
   <p><i>{{post.post_date}}</i></p>
   <p>Likes: {{post.likes}}</p>
+
+  <!-- Form to allow user to like the post (only displays if user hasn't already liked the post)-->
   {% if form_like %}
     <form method="post">
       {% csrf_token %}
@@ -25,14 +28,17 @@
   {% endif %}
 </div>
 
+<!-- Divider -->
 <br />
 <hr class="rounded">
 <br />
 
+
+
 <div class="containercenter">
   <h3>Comments</h3>
   <br />
-
+  <!-- Loops through all of the comments and displays them -->
   {% for comment in comments %}
 
     <a href="{% url 'profile_page' comment.userPosted.user.id %}">
@@ -47,6 +53,9 @@
 
   {% endfor %}
 
+
+
+  <!-- Form to allow use to create a new comment -->
   <h5>Add Comment</h5>
   <form method="post">
     {% csrf_token %}

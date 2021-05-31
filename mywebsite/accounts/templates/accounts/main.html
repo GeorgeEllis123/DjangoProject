@@ -19,19 +19,26 @@
     <!-- Sidenav -->
     <div id="mySidenav" class="sidenav" style="z-index:9999">
       <br />
+      <!-- Link to home page -->
       <a href = "{% url 'home_page' %}">Home</a>
+      <!-- Link to feed page -->
       <a href = "{% url 'feed_page' %}">Feed</a>
+      <!-- Disables the link if user is not logged in -->
       {% if user.is_authenticated %}
+        <!-- Link to profile page -->
         <a href = "{% url 'profile_page' user.id %}">Profile</a>
       {% else %}
         <a>Profile</a>
       {% endif %}
+      <!-- Disables the link if user is not logged in -->
       {% if user.is_authenticated %}
+        <!-- Link to liked posts page -->
         <a href = "{% url 'likedposts_page' user.id %}">Liked</a>
       {% else %}
         <a>Liked</a>
       {% endif %}
     </div>
+
 
     <!-- Navbar -->
     <div class="container-fluid sticky" id="customNav">
@@ -40,17 +47,23 @@
         <div class="bar2"></div>
         <div class="bar3"></div>
       </div>
-      <h2 class="centeredNavInfo">Website Name</h2>
+      <h2 class="centeredNavInfo">Liketerest</h2>
+      <!-- Toggles the display based on if user is logged in or not -->
       {% if user.is_authenticated %}
+        <!-- Displays logout button if logged in -->
         <a href="{% url 'logout' %}" class="rightNavInfo">
-           <button class="btn logout" style="font-size:1.5vw">Log Out</button>
+          <button class="btn logout" style="font-size:1.5vw">Log Out</button>
         </a>
       {% else %}
+        <!-- Displays login button if logged out -->
         <a href="{% url 'login_page' %}" class="rightNavInfo">
            <button class="btn login" style="font-size:1.5vw">Log In</button>
         </a>
       {% endif %}
     </div>
+
+
+    <!-- Content for each page -->
     <div id="main">
       {% block content %}{% endblock %}
     </div>

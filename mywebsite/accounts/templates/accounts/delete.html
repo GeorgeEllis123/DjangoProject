@@ -13,14 +13,24 @@
   </head>
   <body>
 
-    <h3>Are you sure you want to delete your profile</h3>
-    <p><i>Note: This will delete all of your posts and comments</i></p>
-    <form action="{% url 'delete_page' user.id %}" method="POST">
-      {% csrf_token %}
-      <a href="{% url 'profile_page' user.id %}">No</a>
+    <div class="containercenter" style="text-align:center">
+      <!-- Stuff at the top -->
+      <h3>Are you sure you want to delete your profile</h3>
+      <p><i>Note: This will delete all of your posts and comments</i></p>
 
-      <input type="submit" value="Yes" name="Confirm">
-    </form>
+      <form action="{% url 'delete_page' user.id %}" method="POST">
+        {% csrf_token %}
+
+        <!-- Takes user back to their profile page if they don't want to delete their profile -->
+        <a href="{% url 'profile_page' user.id %}">
+          <button type="button" class="btn btn-success">No</button>
+        </a>
+
+        <!-- Deletes the user if pressed -->
+        <input type="submit" type="button" class="btn btn-danger" value="Yes" name="Confirm">
+      </form>
+
+    </div>
 
   </body>
 </html>

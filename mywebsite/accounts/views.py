@@ -197,13 +197,17 @@ def likedposts(request, pk):
     else:
         return redirect('home_page') # Redirects the user to the home page
 
+
+# Renders the page to delete a user
 def delete(request, pk):
-    user = request.user
+    user = request.user # Gets the current user
+    # Checks if a form was submitted and deletes the user respectively
     if request.method == "POST":
         logout(request)
         user.delete()
         return redirect('home_page')
 
+    # Makes sure user can only delete their own profile
     if int(pk) == user.id:
         return render(request, 'accounts/delete.html')
     else:

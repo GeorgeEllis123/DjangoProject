@@ -3,22 +3,38 @@
 
 {% block content %}
 
+<!-- Style sheet to format images -->
 <link rel="stylesheet" href={% static '/css/imagestylesheet.css' %}>
 
+<!-- Displays the form to edit a user profile if the user is logged in -->
 {% if form_post %}
-  <h2 style="text-align:center">Edit Profile</h2>
-  <br />
-  <div class="container-sm">
-    <form method="post" enctype="multipart/form-data" style="text-align:center">
-      {% csrf_token %}
-      {{ form_profile.as_p }}
+  <div class="container-sm" style="text-align:center">
 
+    <h2>Edit Profile</h2>
+
+    <br />
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <!-- Form to change the profile portion of the user's account -->
+      {{ form_profile.as_p }}
+      <!-- Form to change the user portion of the user's account -->
       {{ form_user.as_p }}
 
       <input class="btn submit_btn" type="submit" value="Update" name="Update">
     </form>
+
+    <br />
+
+    <!-- Button that takes user to the page to delete their profile -->
+    <a href="{% url 'delete_page' user.id %}">
+      <button type="button" class="btn btn-danger">Delete Profile</button>
+    </a>
+
   </div>
 
+<!-- Divider -->
   <br />
   <hr class="rounded">
   <br />
@@ -26,7 +42,10 @@
 {% endif %}
 
 
+
+<!-- Displays of the user's posts -->
 <div class="container-sm">
+  <!-- Changes the title based on if this is the user's own profile page -->
   {% if form_post %}
     <h2 style="text-align:center">My Posts</h2>
     <br />
@@ -35,7 +54,7 @@
     <br />
   {% endif %}
 
-
+  <!-- Loops through all of the user's images and dispalys them -->
   {% for post in posts %}
 
     <a href="{% url 'post_page' post.id %}">
@@ -45,22 +64,31 @@
   {% endfor %}
 </div>
 
+
+
+<!-- Dispalys the form to add a post if the user is logged in -->
 {% if form_post %}
+  <!-- Divider -->
   <br />
   <hr class="rounded">
   <br />
 
-  <div class="container-sm">
-    <h2 style="text-align:center">Add Post</h2>
+  <div class="container-sm" style="text-align:center">
+
+    <h2>Add Post</h2>
+
     <br />
-    <form method="post" enctype="multipart/form-data" style="text-align:center">
+
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form_post.as_p }}
 
       <input class="btn submit_btn" type="submit" value="Post" name="NewPost">
     </form>
+
   </div>
 {% endif %}
+
 <br />
 <br />
 
