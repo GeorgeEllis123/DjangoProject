@@ -6,6 +6,11 @@
 <!-- Style sheet to format images -->
 <link rel="stylesheet" href={% static '/css/imagestylesheet.css' %}>
 
+<!-- User profile picture -->
+<img src="{{ profile.profile_pic.url }}" alt="profile pic" style="max-width:20%;border-radius:50%" class="center">
+
+<br />
+
 <!-- Displays the form to edit a user profile if the user is logged in -->
 {% if form_post %}
   <div class="container-sm" style="text-align:center">
