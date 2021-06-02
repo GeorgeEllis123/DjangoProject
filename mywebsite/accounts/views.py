@@ -35,7 +35,7 @@ def profile(request, pk):
         # Checks if the view recieved post data from a form being submitted
         if request.method == "POST":
             if 'NewPost' in request.POST.keys(): # Checks if the create post form was submitted
-                formData = PostForm(request.POST, request.FILES) # Saves the post data
+                formData = PostForm(request.POST, request.FILES) # Stores the post data
                 if formData.is_valid(): # Checks if the form was completed
                     # Saves the data
                     stock = form_post.save(commit=False)
@@ -43,7 +43,7 @@ def profile(request, pk):
                     stock.save()
 
             if 'Update' in request.POST.keys(): # Checks if the update user form was submitted
-                # Saves the post data
+                # Stores the post data
                 userData = UpdateUserForm(request.POST, request.FILES, instance=updateUser)
                 profileData = UpdateProfileForm(request.POST, request.FILES, instance=profile)
                 if userData.is_valid(): # Checks if the form was completed
@@ -81,7 +81,7 @@ def feed(request):
 def loginPage(request):
     # Checks if the view recieved post data from a form being submitted
     if request.method == "POST":
-        # Saves the password and username from the form
+        # Stores the password and username from the form
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -111,7 +111,7 @@ def register(request):
 
     # Checks if the view recieved post data from a form being submitted
     if request.method == 'POST':
-        form = CreateUserForm(request.POST) # Saves the post data
+        form = CreateUserForm(request.POST) # Stores the post data
         if form.is_valid(): # Checks if the form was completed
             # Saves the data
             form.save()
@@ -150,7 +150,7 @@ def post(request, pk):
 
     # Checks if the view recieved post data from a form being submitted
     if request.method == "POST":
-        formData = CommentForm(request.POST) # Saves the post data
+        formData = CommentForm(request.POST) # Stores the post data
         if 'Comment' in request.POST.keys(): # Checks if the create comment form was submitted
             if formData.is_valid(): # Checks if the form was completed
                 # Saves the data
@@ -160,7 +160,7 @@ def post(request, pk):
 
                 stock.save()
 
-        formData = LikeForm(request.POST) # Saves the post data
+        formData = LikeForm(request.POST) # Stores the post data
         if 'Like' in request.POST.keys(): # Checks if the add like form was submitted
             if formData.is_valid(): # Checks if the form was completed
                 # Saves the data
